@@ -19,3 +19,8 @@
 - Chose GitHub Pages "deploy from a branch" over a GitHub Actions workflow to keep the setup minimal and vendor-neutral; pushes to `main` now auto-redeploy.
 - Added the live URL to `README.md` and recorded the provider, publish source, and re-enable steps in `docs/DEPLOYMENT.md`.
 - Verified live site: 12 modules, 6-view navigation, search, P0/P1 filter, localStorage learning status, and concept/product indexes all functioning; no code changes were required (existing code and docs were consistent).
+
+## v1.0.3 — 2026-09-16
+- Content: filled in definitions for all remaining concepts in the concept index. Previously 68 of 89 concepts showed only a fallback note; now every concept has a concise definition (concept index fallback count is 0).
+- Accessibility: module cards are now keyboard-reachable (`tabindex`, `role="button"`, `aria-label`) and open on Enter/Space; added visible `:focus-visible` outlines for cards, nav, filters, search, and status select; added `aria-label` and `type="search"` to the search box.
+- SEO / sharing: added `meta description`, Open Graph and Twitter Card tags, `theme-color`, canonical link, and an inline SVG favicon so the site previews correctly when shared and is indexable.

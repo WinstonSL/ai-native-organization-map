@@ -57,7 +57,76 @@ const conceptDefs = {
  'Persistent Agent':'长期存在、保留上下文/环境，并持续承担职责的 Agent。',
  'AI Teammate':'以团队成员/岗位而非一次任务执行器来设计的 Agent。',
  'Living Software':'数据、Agent 与自动化持续循环运行的软件形态，而非固定逻辑程序。',
- 'Organizational Feedback Loop':'Agent 执行结果进入评估与知识系统，再反过来改进流程、Context 和 Agent。'
+ 'Organizational Feedback Loop':'Agent 执行结果进入评估与知识系统，再反过来改进流程、Context 和 Agent。',
+ 'Deterministic Workflow':'每一步都被规则写死、结果可预测的流程，不依赖 Agent 临场判断。',
+ 'Trigger':'触发流程或 Agent 开始工作的事件，如定时、消息、状态变化或人工发起。',
+ 'Checkpoint':'流程中的检查点，用于保存状态、人工确认或在出错时回退与恢复。',
+ 'Evaluator–Optimizer':'一个 Agent 产出结果、另一个负责评估并给出改进意见的迭代模式。',
+ 'Parallel / Sequential':'任务是并行同时做还是按顺序逐步做，是流程编排的基本选择。',
+ 'Workflow Redesign':'围绕人 + Agent 的新能力重新设计流程，而不是在旧流程上加 AI。',
+ 'Working Memory':'Agent 当前任务里正在使用的短期上下文，类似人脑的临时记忆。',
+ 'Long-term Memory':'跨任务、跨会话长期保存并可被反复调用的知识与经验。',
+ 'Episodic Memory':'关于“发生过什么事”的记忆，如某次任务的具体经过与结果。',
+ 'Semantic Memory':'关于“事实与概念”的记忆，如业务规则、定义、结构化知识。',
+ 'State':'Agent 或流程在某一时刻的完整状态数据，用于继续执行或恢复。',
+ 'Context Compression':'在上下文窗口有限时，把长历史压缩成要点以保留关键信息。',
+ 'Continual Learning':'Agent 从新经验中持续更新知识或行为，而不是训练完就固定。',
+ 'Plan–Act–Observe':'Agent 循环的核心步骤：先计划、再行动、再观察结果并调整。',
+ 'Tool Use':'Agent 调用外部工具（搜索、代码、API 等）来完成靠模型本身做不到的事。',
+ 'Runtime':'真正让 Agent 跑起来的运行环境，管理会话、状态、工具与执行循环。',
+ 'Sandbox':'隔离的安全执行环境，让 Agent 运行代码或操作时不影响真实系统。',
+ 'Computer Use':'在没有 API 时，Agent 直接像人一样操作图形界面（点击、输入）。',
+ 'Session':'一次完整的 Agent 工作过程，包含其上下文、状态与执行轨迹。',
+ 'Tool Calling':'模型按结构化格式请求调用某个工具并接收返回结果的机制。',
+ 'Connector':'把 Agent 接入具体外部系统（如 Gmail、Drive、CRM）的连接件。',
+ 'API':'系统对外暴露能力的标准接口，是 Agent 读写数据、调用功能的基础。',
+ 'Resource':'MCP 中 Server 暴露给 Agent 读取的数据或内容（文件、记录等）。',
+ 'Authorization':'授权机制：决定某个 Agent 被允许访问哪些数据、执行哪些操作。',
+ 'MCP Server':'按 MCP 协议把某个系统的工具和数据暴露给 Agent 的服务端。',
+ 'Supervisor':'负责统筹、分派并监督多个下级 Agent 的主控 Agent。',
+ 'Router':'根据任务类型把请求分发到合适 Agent 或流程分支的调度角色。',
+ 'Delegation':'把某个子任务及必要上下文交给另一个 Agent 去执行。',
+ 'Parallelization':'把可拆分的工作同时交给多个 Agent 并行处理以提高效率。',
+ 'Shared State':'多个 Agent 共同读写的一份状态，用于协作时保持信息一致。',
+ 'Agent Card':'描述一个 Agent 身份、能力和调用方式的标准化清单，便于被发现。',
+ 'Agent Discovery':'在系统中找到可用 Agent 及其能力的机制，是跨 Agent 协作前提。',
+ 'Cross-agent Delegation':'把任务从一个厂商/系统的 Agent 委派给另一个的能力。',
+ 'Interop':'不同来源的 Agent 能相互理解、协作的互操作性。',
+ 'Remote Agent':'运行在其他系统或厂商处、通过协议被远程调用的 Agent。',
+ 'Shared Context':'人与 Agent 共同可见、共同使用的上下文（文件、任务、历史等）。',
+ 'Persistent Workspace':'长期存在、保留项目状态与历史的工作空间，而非一次性会话。',
+ 'Human-Agent Team':'把人和 Agent 当作同一个团队的成员来组织与协作。',
+ 'Agent Board':'展示各 Agent 当前任务、状态与进度的看板式界面。',
+ 'Shared Files':'人与 Agent 都能读写的共享文件区，是协作的物质载体。',
+ 'Agentic App':'以 Agent 为核心运行逻辑的应用，而非固定流程的传统软件。',
+ 'Memory → Intelligence → Execution':'活软件的循环：记忆积累 → 智能判断 → 执行动作，再回流。',
+ 'Generated Business System':'由 AI 根据业务描述生成的、含数据与自动化的完整系统。',
+ 'Agent-native App':'从设计之初就假设 Agent 是主要使用者/执行者的应用形态。',
+ 'Permission':'规定某个 Agent 能访问什么、能做什么的权限设置。',
+ 'Owner':'对某个 Agent 负责的人或团队，承担其行为与后果。',
+ 'Policy':'约束 Agent 行为的规则集合，如可用工具、禁止动作、审批要求。',
+ 'Approval':'高风险动作在执行前必须由人类批准的控制环节。',
+ 'Audit':'完整记录 Agent 做过什么、以便事后追溯与问责。',
+ 'Lifecycle':'Agent 从创建、上线、升级到停用/下线的完整生命周期管理。',
+ 'Shadow Agent':'未登记、无 Owner、脱离治理的“影子 Agent”，是重要风险点。',
+ 'Observability':'能看清 Agent 内部运行（调用、轨迹、成本、错误）的可观测能力。',
+ 'Trajectory':'一次 Agent 运行经过的完整步骤序列，用于分析质量与失败原因。',
+ 'Regression':'新版本导致原本正常的能力变差，需用回归测试及早发现。',
+ 'Cost':'一次 Agent 运行消耗的资源与费用（Token、调用、时间等）。',
+ 'Completion Rate':'Agent 独立成功完成任务的比例，是核心质量指标之一。',
+ 'Escalation Rate':'Agent 无法处理而升级给人工的比例，反映其自主能力边界。',
+ 'Human Correction':'人工对 Agent 输出的纠正，既是质量信号也是改进来源。',
+ 'AI Employee':'被当作长期数字员工、拥有职责与权限来管理的 Agent。',
+ 'Agent Fleet':'一个组织里成规模运行、需统一管理的一批 Agent。',
+ 'Agent Control Plane':'统一管理、调度、监控与治理大量 Agent 的控制平面。',
+ 'Role-based Agent':'围绕某个岗位/角色设计、承担长期职责的 Agent，而非一次性任务。',
+ 'Routine':'Agent 反复执行的固定职责或例行工作流程。',
+ 'AI-native Organization':'从流程、岗位到治理都以“人 + Agent 协作”为前提设计的组织。',
+ 'Role Redesign':'当 Agent 承担部分工作后，对人的岗位职责重新划分与设计。',
+ 'Decision Rights':'明确哪些决策由人拍板、哪些可交给 Agent 的决策权分配。',
+ 'Management Span':'一个管理者能有效带领的对象数量，在人 + Agent 下会改变。',
+ 'Operating Model':'组织如何组织资源、流程与人 + Agent 来持续交付价值的方式。'
+
 };
 
 let current='workflow';
@@ -68,8 +137,12 @@ const detail=document.getElementById('detailPanel');
 function renderModules(term=''){
   const q=term.trim().toLowerCase();
   const list=modules.filter(m=> (filter==='all'||m.p===filter) && (!q || JSON.stringify(m).toLowerCase().includes(q)) );
-  grid.innerHTML=list.length?list.map(m=>`<article class="module" data-id="${m.id}"><span class="prio">${m.p}</span><div class="num">MODULE ${m.n}</div><h4>${m.title}</h4><p>${m.q}</p><div class="tagrow">${m.concepts.slice(0,3).map(x=>`<span class="tag">${x}</span>`).join('')}</div></article>`).join(''):`<div class="empty" style="grid-column:1/-1">没有找到匹配内容。</div>`;
-  document.querySelectorAll('.module').forEach(el=>el.onclick=()=>{current=el.dataset.id;showView('detail');renderDetail();});
+  grid.innerHTML=list.length?list.map(m=>`<article class="module" data-id="${m.id}" tabindex="0" role="button" aria-label="模块 ${m.n}：${m.title}"><span class="prio">${m.p}</span><div class="num">MODULE ${m.n}</div><h4>${m.title}</h4><p>${m.q}</p><div class="tagrow">${m.concepts.slice(0,3).map(x=>`<span class="tag">${x}</span>`).join('')}</div></article>`).join(''):`<div class="empty" style="grid-column:1/-1">没有找到匹配内容。</div>`;
+  document.querySelectorAll('.module').forEach(el=>{
+    const open=()=>{current=el.dataset.id;showView('detail');renderDetail();};
+    el.onclick=open;
+    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};
+  });
 }
 
 function renderDetail(){
