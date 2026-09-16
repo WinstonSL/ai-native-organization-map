@@ -27,9 +27,15 @@ The user is learning many unfamiliar concepts at once and finds long waterfall-s
 - progressive disclosure;
 - a persistent mental model.
 
+## Live site
+
+Deployed on GitHub Pages: **https://winstonsl.github.io/ai-native-organization-map/**
+
+The site is published from the `main` branch (root). Any push to `main` automatically redeploys the live site. See `docs/DEPLOYMENT.md`.
+
 ## Start here
 
-For a human reader: open `index.html`.
+For a human reader: open the live site above, or open `index.html` locally.
 
 For an AI agent that will modify the project: **read `AGENTS.md` first**.
 
@@ -62,7 +68,7 @@ A recurring analysis lens is:
 
 ## Current release
 
-v1.0.1 — 2026-09-16
+v1.0.2 — 2026-09-16
 
 ## Repository boundary
 
