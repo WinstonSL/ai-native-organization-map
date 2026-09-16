@@ -165,7 +165,7 @@ function renderModules(term=''){
   const list=modules.filter(m=> (filter==='all'||m.p===filter) && (!q || JSON.stringify(m).toLowerCase().includes(q)) );
   grid.innerHTML=list.length?list.map(m=>`<article class="module" data-id="${m.id}" tabindex="0" role="button" aria-label="模块 ${m.n}：${m.title}"><span class="prio">${m.p}</span><div class="num">MODULE ${m.n}</div><h4>${m.title}</h4><p>${m.q}</p><div class="tagrow">${m.concepts.slice(0,3).map(x=>`<span class="tag">${x}</span>`).join('')}</div></article>`).join(''):`<div class="empty" style="grid-column:1/-1">没有找到匹配内容。</div>`;
   document.querySelectorAll('.module').forEach(el=>{
-    const open=()=>{current=el.dataset.id;showView('detail');renderDetail();};
+    const open=()=>{location.hash=el.dataset.id;};
     el.onclick=open;
     el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};
   });
@@ -195,7 +195,17 @@ function showView(id){
   document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.view===id));
   if(id==='detail') renderDetail();
 }
-document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showView(b.dataset.view));
+
+// hash 路由：#<模块id> 打开该模块详情；#<视图id> 切到该视图；其它回总地图。
+const viewIds=['overview','detail','journey','concepts','products','lens'];
+function routeFromHash(){
+  const h=decodeURIComponent(location.hash.replace(/^#/,'')).trim();
+  if(modules.some(m=>m.id===h)){ current=h; showView('detail'); }
+  else if(viewIds.includes(h)){ showView(h); }
+  else { showView('overview'); }
+}
+window.addEventListener('hashchange',routeFromHash);
+document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>{location.hash=b.dataset.view;});
 document.querySelectorAll('.pillbtn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.pillbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;renderModules(document.getElementById('search').value);});
 document.getElementById('search').addEventListener('input',e=>{renderModules(e.target.value);renderConcepts(e.target.value);renderProducts(e.target.value);});
-renderModules();renderDetail();renderConcepts();renderProducts();
+renderModules();renderConcepts();renderProducts();routeFromHash();

@@ -30,3 +30,8 @@
 - Each deep module now renders: an in-depth intro, expanded key-concept explanations, hands-on tool/product cards (first-class object + how to start + verified official/doc links), a curated reading list, and a suggested learning path.
 - Emphasized tools/products as the real learning destination: every tool card carries verified official site and documentation links (all links checked reachable before inclusion).
 - Modules without deep content yet degrade gracefully to a short placeholder; the remaining 11 modules will be filled to this template.
+
+## v1.0.5 — 2026-09-16
+- Added hash-based deep linking: opening a module sets the URL to `#<module-id>` (e.g. `#workflow`), and views set `#<view-id>`.
+- Shared/bookmarked links now open directly to the intended module or view; page refresh preserves position; browser back/forward navigate between visited modules/views.
+- Unknown hashes fall back to the overview map. Keyboard (Enter/Space) and click both route through the hash so behavior is consistent.
