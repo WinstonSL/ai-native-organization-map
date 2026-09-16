@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI-Native Organization 学习地图</title>
+<link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand">
+    <div class="eyebrow">Learning Operating System</div>
+    <h1>AI-Native<br>Organization</h1>
+    <p>从“AI 帮个人提效”走向“AI 成为组织中的劳动力、工作系统与治理对象”。</p>
+  </div>
+  <nav id="nav">
+    <button class="navbtn active" data-view="overview">01 · 总地图</button>
+    <button class="navbtn" data-view="detail">02 · 模块学习</button>
+    <button class="navbtn" data-view="journey">03 · 学习顺序</button>
+    <button class="navbtn" data-view="concepts">04 · 概念索引</button>
+    <button class="navbtn" data-view="products">05 · 产品 / 工具</button>
+    <button class="navbtn" data-view="lens">06 · 7 问分析框架</button>
+  </nav>
+  <div class="aside-note"><b>使用方法</b><br>先看“总地图”建立位置感；碰到新名词时用搜索；每周只深入 1 个模块。学习状态会保存在当前浏览器。</div>
+</aside>
+<main>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">2026 · Persistent Learning Map</div>
+      <h2>AI 如何进入组织，<br>并重塑组织。</h2>
+      <p>这不是 Agent 产品清单，而是一套可长期迭代的认知框架：从工作流程、上下文与 Agent，到多 Agent 协作、Workspace、治理、AgentOps，最终抵达 AI-native Organization。</p>
+    </div>
+    <div class="hero-card">
+      <strong>你只需要先记住这条主线</strong>
+      <p>Work → Context → Agent → Coordination → Workspace → Governance → Organization</p>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="search"><input id="search" placeholder="搜索：MCP、Memory、Moxt、AgentOps…" /></div>
+    <button class="pillbtn active" data-filter="all">全部</button>
+    <button class="pillbtn" data-filter="P0">P0 核心</button>
+    <button class="pillbtn" data-filter="P1">P1 进阶</button>
+  </div>
+
+  <section class="view active" id="overview">
+    <div class="section-title"><h3>总地图</h3><p>点击任意模块进入详细学习页</p></div>
+    <div class="spine"><b>组织工作</b><span class="arrow">→</span><b>Workflow</b><span class="arrow">→</span><b>Context / Memory</b><span class="arrow">→</span><b>Agent</b><span class="arrow">→</span><b>Multi-Agent</b><span class="arrow">→</span><b>Workspace</b><span class="arrow">→</span><b>Governance / AgentOps</b><span class="arrow">→</span><b>Organization Design</b></div>
+    <div class="map-grid" id="moduleGrid"></div>
+  </section>
+
+  <section class="view" id="detail">
+    <div class="section-title"><h3>模块学习</h3><p>每次只深入一块，避免信息瀑布</p></div>
+    <div id="detailPanel"></div>
+  </section>
+
+  <section class="view" id="journey">
+    <div class="section-title"><h3>建议学习顺序</h3><p>不是 12 门课同时开始，而是 4 个阶段逐层推进</p></div>
+    <div class="journey">
+      <div class="phase"><div class="phase-no">I</div><h4>先懂 Agent 怎么工作</h4><p>建立底层心智模型。</p><ul><li>Workflow</li><li>Agent Loop / Harness</li><li>MCP / Tool Use</li><li>Context & Memory</li></ul></div>
+      <div class="phase"><div class="phase-no">II</div><h4>再懂协作怎么发生</h4><p>从单 Agent 进入团队。</p><ul><li>Multi-Agent</li><li>Orchestration</li><li>Handoff</li><li>A2A</li><li>Workspace</li></ul></div>
+      <div class="phase"><div class="phase-no">III</div><h4>研究企业怎样真正落地</h4><p>从“能跑”走向“可管理”。</p><ul><li>Governance</li><li>Identity / Permission</li><li>Registry</li><li>Eval / AgentOps</li></ul></div>
+      <div class="phase"><div class="phase-no">IV</div><h4>上升到组织变革</h4><p>最终形成你的专业主线。</p><ul><li>AI Workforce</li><li>Role Redesign</li><li>Operating Model</li><li>AI-native Organization</li></ul></div>
+    </div>
+  </section>
+
+  <section class="view" id="concepts">
+    <div class="section-title"><h3>概念索引</h3><p>新词先归位，再决定要不要深入</p></div>
+    <div class="index-grid" id="conceptGrid"></div>
+  </section>
+
+  <section class="view" id="products">
+    <div class="section-title"><h3>产品 / 工具索引</h3><p>把抽象概念落到真实产品上学习</p></div>
+    <div class="index-grid" id="productGrid"></div>
+  </section>
+
+  <section class="view" id="lens">
+    <div class="section-title"><h3>7 问分析框架</h3><p>看到任何新的“Agent OS / AI Workspace”产品时，用这 7 问拆解</p></div>
+    <div class="seven">
+      <div class="q"><b>01</b><strong>Work</strong><span>它到底在做什么工作？工作有没有被重新设计？</span></div>
+      <div class="q"><b>02</b><strong>Context</strong><span>它需要知道什么？上下文从哪里来，如何持续更新？</span></div>
+      <div class="q"><b>03</b><strong>Agent</strong><span>谁来做？单 Agent、Skill 还是长期角色？</span></div>
+      <div class="q"><b>04</b><strong>Coordination</strong><span>多个 Agent 如何分工、交接、冲突与汇总？</span></div>
+      <div class="q"><b>05</b><strong>Workspace</strong><span>人和 AI 在哪里共享文件、任务、状态与历史？</span></div>
+      <div class="q"><b>06</b><strong>Governance</strong><span>谁拥有它？能访问什么？高风险动作谁批准？</span></div>
+      <div class="q"><b>07</b><strong>Organization</strong><span>最终人的岗位、管理层级、流程和决策权如何改变？</span></div>
+    </div>
+    <div class="study" style="margin-top:16px;border:1px solid var(--line);border-radius:18px"><strong>判断技巧：</strong>不要先问“它有没有 Agent”，而要问“它的一等对象是什么？” Meco 的一等对象更接近 AI Coworker；Asana 是 Work / Task；Taskade Genesis 是 App / System；Multica 是 Human-Agent Work Management。</div>
+  </section>
+
+  <footer class="footer"><span>AI-Native Organization Learning Map · 2026</span><span>定位：长期学习索引，不是一次性读完的文章。</span></footer>
+</main>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
