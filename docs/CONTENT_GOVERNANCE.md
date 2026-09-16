@@ -80,4 +80,7 @@ Avoid:
 Recommended maintenance rhythm:
 - minor update when a major new product/pattern appears;
 - quarterly review of product/tool examples;
+- when reviewing, run `node tools/check-links.mjs` to catch dead external links, and refresh each touched module's date in `moduleUpdated`;
 - larger architecture review only when the mental model itself needs changing.
+
+For the step-by-step update procedure (and the required link-verification and version-bump steps), see `docs/CONTENT_UPDATE_GUIDE.md`.

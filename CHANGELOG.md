@@ -35,3 +35,12 @@
 - Added hash-based deep linking: opening a module sets the URL to `#<module-id>` (e.g. `#workflow`), and views set `#<view-id>`.
 - Shared/bookmarked links now open directly to the intended module or view; page refresh preserves position; browser back/forward navigate between visited modules/views.
 - Unknown hashes fall back to the overview map. Keyboard (Enter/Space) and click both route through the hash so behavior is consistent.
+
+## v1.0.6 — 2026-09-16
+- Knowledge-update system (so the "big book" can be maintained long-term, mainly by future AI agents):
+  - Separated content from code: all knowledge moved to `content.js`; `app.js` is now interaction logic only.
+  - Added per-module last-updated dates (`moduleUpdated`), shown in each module header, so stale sections are visible.
+  - Added `tools/check-links.mjs`: a no-dependency Node script that checks all external links are reachable (run on demand; verified 10/10 links reachable).
+  - Added `docs/CONTENT_UPDATE_GUIDE.md`: a step-by-step procedure an AI agent follows to update knowledge safely.
+  - Fixed the content editing standard into `AGENTS.md` §9 (deep-module structure, "products must state first-class object + how to start", link-verification discipline, staleness rules, hard limits) so future agents keep one consistent voice and format.
+  - Updated `README.md` file list and `docs/CONTENT_GOVERNANCE.md` maintenance rhythm accordingly.

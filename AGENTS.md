@@ -89,7 +89,8 @@ The site should remain easy to open as a local file. Avoid mandatory servers, bu
 
 Current architecture is intentionally simple:
 - static HTML/CSS/JavaScript;
-- `app.js` currently contains the module/product/concept knowledge data as well as interaction logic;
+- `content.js` holds all knowledge data (modules / products / concept definitions / per-module update dates); `app.js` holds interaction logic (render / hash routing / search / learning status). Content and logic are separated so future agents can update knowledge by editing only `content.js`;
+- `tools/check-links.mjs` is a no-dependency Node script that verifies all external links are reachable (run on demand);
 - no backend;
 - no framework dependency;
 - no build step;
@@ -130,3 +131,46 @@ Deployment target: static hosting. The hosting provider is intentionally not fix
 The deployable root is this project directory and the entry file is `index.html`.
 
 See `docs/DEPLOYMENT.md`.
+
+## 9. Content editing standard (for future content updates)
+
+Any agent asked to update, correct, or expand knowledge MUST follow this standard so the site keeps one consistent voice, structure, and quality. The step-by-step procedure is in `docs/CONTENT_UPDATE_GUIDE.md`; this section fixes the non-negotiable standards.
+
+### 9.1 Where content lives
+- All knowledge is in `content.js` (data only). Update knowledge by editing `content.js` — do not edit `app.js` to change content.
+- `content.js` contains: `modules`, `products`, `conceptDefs`, and `moduleUpdated` (per-module last-updated dates).
+
+### 9.2 Deep module structure (fixed order)
+Every deep module (`deep`) uses this order and no other:
+1. `intro` — in-depth understanding: why it matters, relation to adjacent modules.
+2. `keyConcepts` — expanded key concepts: `[[name, explanation], ...]`, concrete and with scenarios.
+3. `tools` — hands-on tools/products: each `{name, object, links, learn}`.
+4. `links` — curated reading list: `[[title, url, why]]`, reading material (articles/guides/videos).
+5. `path` — suggested learning path: ordered steps from "read this first" to "now try this".
+
+### 9.3 Products must answer
+For every product/tool, always state:
+- **First-class object** (`object`): what is its primary abstraction — workflow, task, workspace, runtime, memory layer, coworker, registry, etc.
+- **How to start** (`learn`): what to actually do / what to learn from it.
+
+This is the site's core value: concepts must land on concrete tools. Do not list a product with only a one-line tag.
+
+### 9.4 Link discipline
+- Every URL MUST be verified reachable (HTTP 200 / valid redirect) before it is written in. **Never invent URLs from memory.**
+- Separate reading material (`deep.links`) from tool official/doc links (`deep.tools[].links`).
+- Run `node tools/check-links.mjs` after edits; fix or replace any dead links.
+
+### 9.5 Writing voice
+- Chinese; concise and concrete; conclusion/example first, then expand.
+- Avoid long academic definitions before a concrete example; don't cram too many new terms into one screen.
+- Prefer tables, cards, short explanations over walls of text.
+
+### 9.6 Staleness management
+- After a substantive change to a module, set that module's date in `moduleUpdated` to the edit date (`YYYY-MM-DD`); it shows in the module header.
+- Record the change in `CHANGELOG.md` and bump the version (footer in `index.html` + "Current release" in `README.md`).
+
+### 9.7 Hard limits (do not break)
+- Stay static: no build step, no backend, no database, no framework.
+- Keep modular browsing (overview → module → deep chapter); never turn it into one long scrolling article.
+- Keep hash deep links (`#module-id`) working.
+- Do not merge this repo into `personal-knowledge-management-solution` (see `docs/REPOSITORY_BOUNDARY.md`).

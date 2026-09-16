@@ -43,10 +43,13 @@ For an AI agent that will modify the project: **read `AGENTS.md` first**.
 
 - `index.html` — page structure
 - `styles.css` — visual system and responsive layout
-- `app.js` — knowledge content + interaction logic
-- `AGENTS.md` — operating manual and constraints for future AI agents
+- `content.js` — all knowledge content (modules / products / concept definitions / per-module update dates)
+- `app.js` — interaction logic (render, hash routing, search, learning status)
+- `tools/check-links.mjs` — on-demand external-link health check (Node 18+, no dependencies)
+- `AGENTS.md` — operating manual and constraints for future AI agents (incl. the content editing standard)
 - `docs/PROJECT_CONTEXT.md` — background, user intent, and design rationale
 - `docs/CONTENT_GOVERNANCE.md` — how to evolve the knowledge safely
+- `docs/CONTENT_UPDATE_GUIDE.md` — step-by-step procedure for an AI agent updating the knowledge
 - `docs/DEPLOYMENT.md` — hosting and update workflow
 - `docs/REPOSITORY_BOUNDARY.md` — hard boundary between this website and the separate personal knowledge-management project
 - `ROADMAP.md` — future improvements
@@ -68,7 +71,7 @@ A recurring analysis lens is:
 
 ## Current release
 
-v1.0.5 — 2026-09-16
+v1.0.6 — 2026-09-16
 
 ## Repository boundary
 
