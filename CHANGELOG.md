@@ -24,3 +24,9 @@
 - Content: filled in definitions for all remaining concepts in the concept index. Previously 68 of 89 concepts showed only a fallback note; now every concept has a concise definition (concept index fallback count is 0).
 - Accessibility: module cards are now keyboard-reachable (`tabindex`, `role="button"`, `aria-label`) and open on Enter/Space; added visible `:focus-visible` outlines for cards, nav, filters, search, and status select; added `aria-label` and `type="search"` to the search box.
 - SEO / sharing: added `meta description`, Open Graph and Twitter Card tags, `theme-color`, canonical link, and an inline SVG favicon so the site previews correctly when shared and is indexable.
+
+## v1.0.4 — 2026-09-16
+- Started the "deep chapter" content upgrade, beginning with Module 01 (Workflow & Process Redesign) as the template.
+- Each deep module now renders: an in-depth intro, expanded key-concept explanations, hands-on tool/product cards (first-class object + how to start + verified official/doc links), a curated reading list, and a suggested learning path.
+- Emphasized tools/products as the real learning destination: every tool card carries verified official site and documentation links (all links checked reachable before inclusion).
+- Modules without deep content yet degrade gracefully to a short placeholder; the remaining 11 modules will be filled to this template.
