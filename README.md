@@ -71,7 +71,7 @@ A recurring analysis lens is:
 
 ## Current release
 
-v1.0.6 — 2026-09-16
+v1.0.7 — 2026-09-16
 
 ## Repository boundary
 

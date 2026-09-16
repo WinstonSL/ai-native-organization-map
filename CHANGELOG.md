@@ -44,3 +44,9 @@
   - Added `docs/CONTENT_UPDATE_GUIDE.md`: a step-by-step procedure an AI agent follows to update knowledge safely.
   - Fixed the content editing standard into `AGENTS.md` §9 (deep-module structure, "products must state first-class object + how to start", link-verification discipline, staleness rules, hard limits) so future agents keep one consistent voice and format.
   - Updated `README.md` file list and `docs/CONTENT_GOVERNANCE.md` maintenance rhythm accordingly.
+
+## v1.0.7 — 2026-09-16
+- Filled deep-chapter content for all 7 remaining P0 modules (Context & Memory, Agent Architecture, Tool & System Connectivity, Human-Agent Workspace, Governance, Evaluation & AgentOps, Organization Design), following the AGENTS.md §9 template.
+- Each now has: in-depth intro, expanded key concepts, hands-on tool cards (first-class object + how to start + verified links), curated reading list, and learning path.
+- All external links verified reachable via `tools/check-links.mjs` (39/39 reachable); replaced links that failed verification (Moxt, Google Cloud pages, unstable Microsoft marketing URL) with reachable official/doc alternatives; omitted links that could not be confirmed reachable from this environment rather than guessing.
+- The 4 P1 modules (Multi-Agent, Interoperability, AI-native App, AI Workforce) still show the placeholder and will be filled in the next batch.
