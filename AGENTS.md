@@ -81,6 +81,7 @@ Preserve these behaviors unless there is a strong reason to redesign:
 - 7-question analysis framework;
 - full-site search/filter;
 - local learning status stored in browser localStorage;
+- "Ask AI" (问 AI): concept cards and deep key-concepts have a button that opens the user's preferred AI with the question pre-filled and copied to clipboard; the preferred AI is set once and stored in localStorage. Keep this backend-free (no API key, browser just opens the AI site).
 - responsive mobile layout.
 
 The site should remain easy to open as a local file. Avoid mandatory servers, build steps, databases, or authentication unless the project intentionally evolves beyond a personal knowledge map.

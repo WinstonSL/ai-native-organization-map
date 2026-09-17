@@ -55,3 +55,10 @@
 - Filled deep-chapter content for the 4 remaining P1 modules (Multi-Agent & Orchestration, Agent Interoperability, AI-native App / Living Software, AI Workforce & Agent Management).
 - All 12 modules now have full deep chapters (intro, expanded key concepts, hands-on tool cards, curated reading list, learning path) following the AGENTS.md §9 template.
 - All external links verified reachable via `tools/check-links.mjs` (43/43 reachable); unreachable candidates (A2A GitHub, a 404 CrewAI enterprise URL) replaced with verified official/doc alternatives.
+
+## v1.0.9 — 2026-09-16
+- Added "Ask AI" (问 AI): when stuck on a concept, one click opens the user's preferred AI with the question pre-filled.
+  - "🤖 问 AI" buttons on every concept-index card (89) and on each expanded key-concept in the deep chapters.
+  - Preferred AI is chosen once in "⚙ 设置常用 AI" (sidebar) and stored in localStorage; presets: ChatGPT, Perplexity, Kimi, DeepSeek, 豆包, 通义, plus a custom-URL option (use `{q}` placeholder for auto-fill).
+  - The question is always copied to the clipboard as a fallback, so providers that don't support URL query pre-fill still work by pasting; providers that do (e.g. ChatGPT, Perplexity, custom `{q}`) also get the question auto-filled.
+  - No backend and no API key: the browser just opens the chosen AI site. Purely static, consistent with the project's constraints.
