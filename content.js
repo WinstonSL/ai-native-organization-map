@@ -101,8 +101,54 @@ const modules = [
     '有余力看 Claude Code 如何挂载并调用一个 MCP Server，把协议落到实操。',
    ]
   }},
- {id:'multi',n:'05',p:'P1',title:'Multi-Agent & Orchestration',q:'什么时候需要多个 Agent？',desc:'核心不是“多个 Agent 聊天”，而是 Delegation、Handoff、共享状态、Supervisor 与并行协作。',concepts:['Subagent','Supervisor','Router','Delegation','Handoff','Parallelization','Shared State','Orchestrator'],tools:[['LangGraph','图式多 Agent 编排'],['CrewAI','按角色建立 Agent Crew'],['Microsoft Agent Framework','多 Agent + Workflow'],['Moxt','在 Workspace 中观察多 Agent 协作']],learn:'最重要的问题不是“怎么做更多 Agent”，而是：什么时候一个 Agent + Skills 已经足够，什么时候拆分才真的提高质量或效率。'},
- {id:'a2a',n:'06',p:'P1',title:'Agent Interoperability',q:'不同 Agent 如何跨系统协作？',desc:'当 Agent 来自不同厂商、不同团队时，需要 Discovery、身份描述、任务委派与状态返回。',concepts:['A2A','Agent Card','Agent Discovery','Cross-agent Delegation','Interop','Remote Agent'],tools:[['A2A Protocol','重点理解 Agent ↔ Agent'],['MCP','与 A2A 对照：Agent ↔ Tools/Data'],['Agent Card','Agent 能力与身份的可发现描述'],['跨厂商 Agent 协作','关注协议而非单一平台']],learn:'先搞懂 MCP 与 A2A 的分工即可。A2A 属于观察中的关键协议，不必现在深入实现细节。'},
+ {id:'multi',n:'05',p:'P1',title:'Multi-Agent & Orchestration',q:'什么时候需要多个 Agent？',desc:'核心不是“多个 Agent 聊天”，而是 Delegation、Handoff、共享状态、Supervisor 与并行协作。',concepts:['Subagent','Supervisor','Router','Delegation','Handoff','Parallelization','Shared State','Orchestrator'],tools:[['LangGraph','图式多 Agent 编排'],['CrewAI','按角色建立 Agent Crew'],['Microsoft Agent Framework','多 Agent + Workflow'],['Moxt','在 Workspace 中观察多 Agent 协作']],learn:'最重要的问题不是“怎么做更多 Agent”，而是：什么时候一个 Agent + Skills 已经足够，什么时候拆分才真的提高质量或效率。',deep:{
+   intro:'“多个 Agent 一起聊天”听起来很酷，但常常比一个强 Agent + 好工具更慢、更难控、更贵。多 Agent 真正的价值不在“数量”，而在协作结构：把大任务拆给子 Agent（Delegation）、在 Agent 间交接任务和上下文（Handoff）、用一个 Supervisor 统筹、用共享状态保持一致、能并行时并行。所以这一章的核心判断题是：什么时候该拆？答案通常是——当任务能清晰拆成相对独立的子任务、或需要不同专长时，拆分才提高质量或效率；否则加 Agent 只是加复杂度。理解这一章，你就不会被“多智能体”这个词忽悠，而是能判断一个场景到底该用单 Agent 还是多 Agent。它承接 Agent 架构（单个 Agent 怎么工作），引出 Workspace（多 Agent 在哪协作）和 A2A（跨厂商 Agent 怎么协作）。',
+   keyConcepts:[
+    ['Delegation / Handoff','Delegation 是把子任务交给另一个 Agent 执行；Handoff 是把任务、责任和必要上下文正式转交。交接时上下文不丢，是多 Agent 能协作的前提。'],
+    ['Supervisor / Router / Orchestrator','Supervisor 统筹监督下级；Router 按任务类型分发；Orchestrator 总控多 Agent 与步骤。它们回答“谁来指挥”的问题。'],
+    ['Shared State（共享状态）','多个 Agent 读写同一份状态，才能协同而不各干各的。状态管理没做好，多 Agent 就会互相打架。'],
+    ['何时该拆（核心判断）','任务能拆成独立子任务、或需要不同专长时，多 Agent 提质增效；否则单 Agent + Skills 更简单可靠。不要为多而多。'],
+   ],
+   tools:[
+    {name:'LangGraph',object:'一等对象是「多 Agent 的状态图」——用图显式编排 Supervisor、子 Agent、共享状态与交接。',links:[['官网','https://www.langchain.com/langgraph'],['多 Agent 概念','https://langchain-ai.github.io/langgraph/concepts/multi_agent/']],learn:'最适合看清“多 Agent 协作”背后的结构：谁指挥、状态怎么共享、任务怎么交接。看懂图即可，不必写代码。'},
+    {name:'CrewAI',object:'一等对象是「角色化的 Agent Crew」——按角色组队（研究员、审稿人…），再用 Flow 约束流程。',links:[['官网','https://www.crewai.com/'],['Crews 文档','https://docs.crewai.com/concepts/crews']],learn:'体会“按角色分工”的多 Agent 思路，对照 LangGraph 的“按图编排”，理解两种组织 Agent 的方式。'},
+    {name:'Microsoft Agent Framework',object:'一等对象是「企业级多 Agent + 工作流」——把多 Agent 协作与 Checkpoint、人工介入结合。',links:[['官方文档','https://learn.microsoft.com/en-us/agent-framework/']],learn:'关注企业场景下多 Agent 如何被编排且保持可控（可检查、可介入），而不只是自由对话。'},
+   ],
+   links:[
+    ['Anthropic · Building Effective Agents','https://www.anthropic.com/engineering/building-effective-agents','明确讨论了何时用 workflow、何时用单/多 Agent，是判断“该不该拆”的最佳依据。'],
+    ['LangGraph · Multi-agent 概念','https://langchain-ai.github.io/langgraph/concepts/multi_agent/','系统讲 Supervisor、network、handoff 等多 Agent 拓扑，帮你把概念落到结构。'],
+   ],
+   path:[
+    '先记住核心判断：多 Agent 不天然更好，关键看任务能否清晰拆分。',
+    '读 Anthropic《Building Effective Agents》里关于单 Agent vs 多 Agent 的部分。',
+    '读 LangGraph 多 Agent 概念，认识 Supervisor / Router / Handoff / Shared State。',
+    '拿一个真实复杂任务，判断它该用“单 Agent + Skills”还是“多 Agent”，并说出理由。',
+   ]
+  }},
+ {id:'a2a',n:'06',p:'P1',title:'Agent Interoperability',q:'不同 Agent 如何跨系统协作？',desc:'当 Agent 来自不同厂商、不同团队时，需要 Discovery、身份描述、任务委派与状态返回。',concepts:['A2A','Agent Card','Agent Discovery','Cross-agent Delegation','Interop','Remote Agent'],tools:[['A2A Protocol','重点理解 Agent ↔ Agent'],['MCP','与 A2A 对照：Agent ↔ Tools/Data'],['Agent Card','Agent 能力与身份的可发现描述'],['跨厂商 Agent 协作','关注协议而非单一平台']],learn:'先搞懂 MCP 与 A2A 的分工即可。A2A 属于观察中的关键协议，不必现在深入实现细节。',deep:{
+   intro:'上一章的多 Agent，通常还是同一个系统、同一个厂商内部的协作。但真实世界里，Agent 会来自不同厂商、不同团队——你的 Agent 想让对方的 Agent 帮忙办件事，怎么办？这就是 Agent 互操作（Interoperability）要解决的：一个 Agent 如何被“发现”、如何描述自己“是谁、能做什么”（Agent Card）、如何跨系统委派任务并拿回结果。A2A（Agent-to-Agent）就是面向这个场景的开放协议。这里有个关键对照要记牢：MCP 解决“Agent ↔ 工具/数据”（我怎么用外部系统），A2A 解决“Agent ↔ Agent”（我怎么和别的 Agent 协作）。两者不是竞争，是互补。这一章目前属于“观察中的关键协议”——你不需要深入实现细节，但要理解它在整张地图里补的是“跨组织协作”这块，往前接多 Agent，往后连治理（跨厂商协作时身份和权限怎么办）。',
+   keyConcepts:[
+    ['A2A 与 MCP 的分工','MCP = Agent 连工具/数据；A2A = Agent 连 Agent。先把这条对照记牢，很多混淆就没了。'],
+    ['Agent Card','描述一个 Agent 身份、能力、调用方式的标准化清单——让别的系统能“发现”并知道怎么用它。是跨 Agent 协作的名片。'],
+    ['Agent Discovery / Cross-agent Delegation','先发现有哪些可用 Agent 及其能力，再把任务跨系统委派出去、拿回状态与结果。'],
+    ['Remote Agent','运行在别处（别的系统/厂商）、通过协议被远程调用的 Agent。跨组织协作的基本单位。'],
+   ],
+   tools:[
+    {name:'A2A Protocol',object:'一等对象是「Agent↔Agent 的开放协议」——跨厂商的发现、委派、协作与状态沟通。',links:[['官网','https://a2a-protocol.org/'],['What is A2A','https://a2a-protocol.org/latest/topics/what-is-a2a/']],learn:'重点搞懂 Agent Card 如何标准化“一个 Agent 是谁、能做什么”，以及跨 Agent 委派的基本流程。不必深入实现。'},
+    {name:'MCP（对照理解）',object:'一等对象是「Agent↔工具/数据协议」——放在这里是为了和 A2A 对照，划清两者边界。',links:[['官网/文档','https://modelcontextprotocol.io/']],learn:'用一句话说清 MCP 和 A2A 各解决什么——能说清，这一章就掌握了大半。'},
+    {name:'Microsoft Agent Framework（互操作视角）',object:'一等对象是「企业 Agent 框架」——观察企业方案如何接入 Agent 间协作与标准。',links:[['官方文档','https://learn.microsoft.com/en-us/agent-framework/']],learn:'关注企业框架如何看待“与外部 Agent 协作”，把协议放进落地语境。'},
+   ],
+   links:[
+    ['A2A · What is A2A','https://a2a-protocol.org/latest/topics/what-is-a2a/','官方入门，讲清 A2A 要解决什么、Agent Card 是什么，是理解这一章的最短路径。'],
+    ['Anthropic · Building Effective Agents','https://www.anthropic.com/engineering/building-effective-agents','帮你把“单 Agent → 多 Agent → 跨 Agent 协作”的演进放进统一图景。'],
+   ],
+   path:[
+    '先用一句话记住：MCP 是 Agent↔工具，A2A 是 Agent↔Agent。',
+    '读 A2A 官方“What is A2A”，理解 Agent Card 与跨 Agent 委派。',
+    '想一个场景：你的 Agent 需要另一个团队的 Agent 帮忙，它得先“发现”对方、看懂对方能做什么——体会 Agent Card 的作用。',
+    '这一章保持“理解定位”即可，不必深入实现，留意它未来与治理（跨厂商身份/权限）的结合。',
+   ]
+  }},
  {id:'workspace',n:'07',p:'P0',title:'Human-Agent Workspace',q:'人和 Agent 在哪里共同工作？',desc:'Workspace 不是 UI 外壳，而是共享 Context、文件、任务、状态、历史、权限与干预入口。',concepts:['Agent-native Workspace','Shared Context','Persistent Workspace','AI Teammate','Human-Agent Team','Agent Board','Shared Files'],tools:[['Moxt','典型 Agent-native Workspace'],['Meco','AI Coworker / 产品团队协作'],['Asana AI Teammates','从 Work Management 容纳 Agent'],['Multica','Human + Agent Work Management']],learn:'观察“如果 40% 团队成员是 Agent，Workspace 要怎么设计”：身份、任务、@、Inbox、共享历史、权限、状态、离职/下线。',deep:{
    intro:'当团队里既有人也有 Agent，他们在哪里一起工作？如果答案还是“人在 A 工具、Agent 在对话框”，协作就是断裂的。Agent-native Workspace 的核心观点是：Workspace 不是给人看的界面外壳，而是人和 Agent 共享的“工作现场”——同一份文件、同一批任务、同一条历史、同一套权限，人能 @ Agent、Agent 能把结果交回来、人能随时介入纠正。这一章把前面几章“落地”了：Context 在这里共享、Agent 在这里被指派、治理在这里施加。判断一个协作产品是不是真的 Agent-native，就看它有没有认真回答：Agent 有没有身份？能不能被分配任务？出了错人怎么接管？它“下线”时会发生什么？',
    keyConcepts:[
@@ -127,7 +173,29 @@ const modules = [
     '记下你认为“真正 Agent-native”必须具备、但现有产品还没做好的一点。',
    ]
   }},
- {id:'app',n:'08',p:'P1',title:'AI-native App / Living Software',q:'软件本身会不会变成 Agent 系统？',desc:'从固定逻辑的软件，走向 Memory + Intelligence + Execution 持续循环的“活软件”。',concepts:['Living Software','Agentic App','Memory → Intelligence → Execution','Generated Business System','Agent-native App'],tools:[['Taskade Genesis','最直观的 Living Software 样本'],['AI App Builder','观察 App + Database + Agent + Automation 的融合'],['Internal Tool Builder','企业内部系统的 Agent 化方向']],learn:'重点理解“在软件里加 AI”与“软件本身就是 Agentic System”的区别。'},
+ {id:'app',n:'08',p:'P1',title:'AI-native App / Living Software',q:'软件本身会不会变成 Agent 系统？',desc:'从固定逻辑的软件，走向 Memory + Intelligence + Execution 持续循环的“活软件”。',concepts:['Living Software','Agentic App','Memory → Intelligence → Execution','Generated Business System','Agent-native App'],tools:[['Taskade Genesis','最直观的 Living Software 样本'],['AI App Builder','观察 App + Database + Agent + Automation 的融合'],['Internal Tool Builder','企业内部系统的 Agent 化方向']],learn:'重点理解“在软件里加 AI”与“软件本身就是 Agentic System”的区别。',deep:{
+   intro:'过去的软件是“固定逻辑”：你点按钮，它按写死的流程执行。AI-native App / Living Software 是另一种形态——软件本身就是一个持续运转的 Agent 系统：它有记忆（Memory）、能判断（Intelligence）、能执行（Execution），三者循环，还能根据业务描述自己生成 App、数据表、Agent 和自动化。这一章要分清两件常被混淆的事：“在软件里加个 AI 助手”，和“软件本身就是 Agentic System”，是根本不同的形态——前者是旧软件贴层皮，后者是重新定义软件。理解它，你就能看懂 Taskade Genesis 这类产品为什么值得关注：它不是“带 AI 的工具”，而是“描述业务→生成一个活的系统”。这一章把 Workflow（流程重构）和 Agent（执行底盘）推到极致：当流程、数据、Agent、自动化融为一体，软件就“活”了。',
+   keyConcepts:[
+    ['Living Software（活软件）','数据、Agent、自动化持续循环运行的软件形态，而非一次写死的程序。它会随使用而演化，而不是等人改代码。'],
+    ['Memory → Intelligence → Execution','活软件的核心循环：积累记忆 → 智能判断 → 执行动作 → 结果再回流成记忆。理解这个循环，就理解了“活”在哪。'],
+    ['Generated Business System','由 AI 根据业务描述生成的完整系统（含 App + 数据 + Agent + 自动化），而不是人工从零搭建。'],
+    ['两种形态的分界','“在软件里加 AI” vs “软件本身是 Agentic System”。判断一个产品属于哪一类，是本章最有价值的分辨力。'],
+   ],
+   tools:[
+    {name:'Taskade Genesis',object:'一等对象是「生成出来的业务系统」——一句业务描述生成 App + Agent + Automation + 数据。',links:[['官网','https://www.taskade.com/'],['AI Agents','https://www.taskade.com/ai/agents']],learn:'最直观的 Living Software 样本。亲手描述一个小业务，看它生成出的系统里 App、数据、Agent、自动化是怎么融为一体的。'},
+    {name:'Taskade（帮助中心）',object:'一等对象是「可上手的活软件平台」——从文档理解它把哪些能力做成了一体。',links:[['帮助中心','https://help.taskade.com/']],learn:'查它对 Agent、Automation、Project 的定义，体会“软件即 Agentic System”在产品层面长什么样。'},
+   ],
+   links:[
+    ['Anthropic · Building Effective Agents','https://www.anthropic.com/engineering/building-effective-agents','帮你分清“加个 AI 功能”和“系统本身是 Agentic”的区别——这正是本章的核心分辨力。'],
+    ['Chip Huyen · Agents','https://huyenchip.com/2025/01/07/agents.html','系统理解 Agent 的记忆-规划-执行，正好对应活软件的 Memory→Intelligence→Execution 循环。'],
+   ],
+   path:[
+    '先记住分界：“在软件里加 AI” ≠ “软件本身是 Agentic System”。',
+    '用 Taskade Genesis 描述一个小业务，观察它生成的系统由哪些部分组成。',
+    '对照 Memory→Intelligence→Execution，找出这个生成系统里三者分别在哪。',
+    '判断你日常用的某个软件属于哪一类，说出理由——这就是本章要练的分辨力。',
+   ]
+  }},
  {id:'gov',n:'09',p:'P0',title:'Governance',q:'Agent 被允许做什么？谁负责？',desc:'Agent 规模化以后必须像员工和软件资产一样被登记、授权、审计、审批和下线。',concepts:['Agent Identity','Permission','Owner','Agent Registry','Policy','Approval','Audit','Lifecycle','Shadow Agent'],tools:[['Microsoft Agent 365','Agent 身份、权限、治理、生命周期'],['Google Agent Registry','统一登记 Agents / Tools / Skills / MCP'],['Enterprise IAM','理解 Agent 如何进入企业身份体系'],['Approval Layer','高风险行为的人类审批机制']],learn:'这是与你职业方向非常匹配的一块。试着设计：Agent 创建、Owner、授权、敏感动作、审计、版本升级、撤权、下线的完整治理规则。',deep:{
    intro:'一两个 Agent 时，治理不是问题；几百个 Agent 在公司里跑起来时，治理就是生死问题。每个 Agent 能访问什么数据、能执行什么操作、由谁负责、出了事怎么追溯、不用了怎么下线——这些如果没人管，就会出现“影子 Agent”：没人登记、没有 Owner、权限不明，却在真实系统里动数据。所以成熟组织把 Agent 当成“员工 + 软件资产”的混合体来治理：像员工一样有身份和 Owner，像软件一样要登记、授权、审计、版本管理和退役。这一章和你的职业方向高度契合——它不是技术炫技，而是把前面几章（能连系统、能自主行动的 Agent）装进企业可控的框架里。往前接工具连接（连上之后谁批准），往后连 AgentOps（治理需要可观测来支撑）。',
    keyConcepts:[
@@ -176,7 +244,30 @@ const modules = [
     '为你关心的一个 Agent 任务，亲手列出 5 个该监控的指标（如完成率、接管率、成本）。',
    ]
   }},
- {id:'workforce',n:'11',p:'P1',title:'AI Workforce & Agent Management',q:'Agent 从工具变成“组织资源”后怎么管理？',desc:'Persistent AI Teammate、Agent Fleet、Role-based Agent 和 Control Plane 都在把 Agent 当成可长期运营的数字劳动力。',concepts:['AI Employee','AI Teammate','Agent Fleet','Agent Control Plane','Role-based Agent','Routine','Persistent Agent'],tools:[['Grok Bot','Role-centric / Persistent AI Teammate'],['Asana AI Teammates','Agent 进入真实工作管理系统'],['Multica','Human-Agent 任务与项目管理'],['CrewAI Enterprise','Agent Crew / 企业化管理思路']],learn:'重点区分 Task-centric Agent 和 Role-centric Agent；观察 Agent 是否拥有长期职责、Memory、Routine、Owner、权限和绩效。'},
+ {id:'workforce',n:'11',p:'P1',title:'AI Workforce & Agent Management',q:'Agent 从工具变成“组织资源”后怎么管理？',desc:'Persistent AI Teammate、Agent Fleet、Role-based Agent 和 Control Plane 都在把 Agent 当成可长期运营的数字劳动力。',concepts:['AI Employee','AI Teammate','Agent Fleet','Agent Control Plane','Role-based Agent','Routine','Persistent Agent'],tools:[['Grok Bot','Role-centric / Persistent AI Teammate'],['Asana AI Teammates','Agent 进入真实工作管理系统'],['Multica','Human-Agent 任务与项目管理'],['CrewAI Enterprise','Agent Crew / 企业化管理思路']],learn:'重点区分 Task-centric Agent 和 Role-centric Agent；观察 Agent 是否拥有长期职责、Memory、Routine、Owner、权限和绩效。',deep:{
+   intro:'前面把 Agent 当“能干活的东西”，这一章把它当“组织资源”来管。区别在于视角：Task-centric Agent 是一次性执行器，做完即走；Role-centric Agent 是长期角色，像员工一样有持续职责、记忆、例行工作（Routine）、Owner、权限，甚至要看“绩效”。当组织里跑着一批这样的持久 Agent（Agent Fleet），就需要一个控制平面（Control Plane）来统一调度、监控、管理它们——就像 HR + 运维的结合体。这一章是 Governance 和 Organization 之间的桥：治理解决“单个 Agent 被允许做什么”，本章解决“一群长期 Agent 作为数字劳动力怎么被运营”，再往上就是组织如何因此重新设计。判断一个产品是否触及“AI Workforce”，就看它有没有把 Agent 当成有长期身份和职责的“数字员工”，而不只是功能按钮。',
+   keyConcepts:[
+    ['Task-centric vs Role-centric','前者是一次性任务执行器，后者是有长期职责的角色。这是本章最重要的分辨：Agent 是“工具”还是“员工”。'],
+    ['Persistent Agent / AI Teammate','长期存在、保留上下文与环境、持续承担职责的 Agent——按“岗位”而非“单次任务”设计。'],
+    ['Agent Fleet / Control Plane','一批规模化运行的 Agent（Fleet）需要一个控制平面（Control Plane）统一调度、监控、治理，像运营一支数字劳动力队伍。'],
+    ['Routine 与绩效','Agent 反复执行的例行职责（Routine），以及像评估员工一样评估 Agent 的产出与质量——把 AgentOps 的指标用到“人力资源”视角。'],
+   ],
+   tools:[
+    {name:'Multica',object:'一等对象是「人 + Agent 的劳动力管理」——统一管理人、多个 Agent、任务、状态，像调度一支混合团队。',links:[['官网','https://www.multica.ai/']],learn:'观察它如何把“多个 Agent + 人”当作可长期运营的团队来调度，体会 Control Plane 的雏形。'},
+    {name:'Asana AI Teammates',object:'一等对象是「工作管理系统里的 AI 队友」——让 Agent 进入真实的任务/项目体系并承担职责。',links:[['AI 产品页','https://asana.com/product/ai'],['官网','https://asana.com/']],learn:'看 Agent 如何从“工具”变成“工作系统里有任务、有归属的成员”，理解 Role-centric 的落地。'},
+    {name:'CrewAI Enterprise',object:'一等对象是「企业化管理的 Agent Crew」——把角色化 Agent 队伍做成可企业运营的资源。',links:[['企业文档','https://docs.crewai.com/enterprise/introduction']],learn:'关注从“搭一个 Crew”到“把 Crew 当企业资源持续管理”的转变，对应 Agent Fleet 的运营视角。'},
+   ],
+   links:[
+    ['Microsoft Work Trend Index','https://www.microsoft.com/en-us/worklab/work-trend-index','用调研数据观察“Agent 作为劳动力”正在如何进入真实组织。'],
+    ['Anthropic · Building Effective Agents','https://www.anthropic.com/engineering/building-effective-agents','回到 Agent 能力本质，判断哪些职责真能交给一个“长期角色 Agent”。'],
+   ],
+   path:[
+    '先分清 Task-centric 和 Role-centric 两种 Agent，各举一例。',
+    '体验 Multica / Asana AI，看 Agent 如何被当作有职责、有归属的“成员”。',
+    '为一个假想的“AI 员工”列出它该有的东西：长期职责、Memory、Routine、Owner、权限、绩效指标。',
+    '把本章与治理、组织设计连起来：一群数字员工，谁管、怎么管、如何改变组织——这就是通往终章的路。',
+   ]
+  }},
  {id:'org',n:'12',p:'P0',title:'Organization Design & Transformation',q:'最终人的岗位和组织怎样改变？',desc:'这是最终目标：从部署 Agent 上升到重新设计岗位、决策权、管理跨度、Operating Model 与组织能力。',concepts:['AI-native Organization','Role Redesign','Decision Rights','Human-in-the-loop','Management Span','Operating Model','Organizational Feedback Loop'],tools:[['Microsoft Work Trend Index','观察 Human-Agent Team 与组织趋势'],['OpenAI 企业实践','观察 workflow design / governance / adoption'],['Anthropic 企业 Agent 案例','观察从单步到多阶段 Agent workflow'],['真实企业试点','最终必须回到业务流程与组织实践']],learn:'长期研究，不追求一次学完。你的最终专业能力应是：把 Workflow、Context、Agent、Workspace、Governance 组合成可运行的组织变革方案。',deep:{
    intro:'这是整张地图的终点，也是你专业价值的落点。前面几章解决“Agent 怎么工作、怎么协作、怎么被治理”，但真正的组织变革问题是：当 Agent 成为能干活的组织成员，人的岗位该怎么重新设计？哪些决策还归人、哪些可交给 Agent？管理者带的“下属”里有 Agent，管理跨度怎么变？流程、决策权、运营模式（Operating Model）会如何重构？注意一个陷阱：AI-native Organization 不等于“上了很多 Agent”，而是组织的运作方式本身被重新设计。这一章没有标准答案、也不追求一次学完——它要求你把 Workflow、Context、Agent、Workspace、Governance 这些拼图组合成“某个真实业务/组织能跑起来的变革方案”。这正是从“会用 Agent”到“能设计 AI-native 组织”的跃迁。',
    keyConcepts:[

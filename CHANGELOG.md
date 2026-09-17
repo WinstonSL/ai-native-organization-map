@@ -50,3 +50,8 @@
 - Each now has: in-depth intro, expanded key concepts, hands-on tool cards (first-class object + how to start + verified links), curated reading list, and learning path.
 - All external links verified reachable via `tools/check-links.mjs` (39/39 reachable); replaced links that failed verification (Moxt, Google Cloud pages, unstable Microsoft marketing URL) with reachable official/doc alternatives; omitted links that could not be confirmed reachable from this environment rather than guessing.
 - The 4 P1 modules (Multi-Agent, Interoperability, AI-native App, AI Workforce) still show the placeholder and will be filled in the next batch.
+
+## v1.0.8 — 2026-09-16
+- Filled deep-chapter content for the 4 remaining P1 modules (Multi-Agent & Orchestration, Agent Interoperability, AI-native App / Living Software, AI Workforce & Agent Management).
+- All 12 modules now have full deep chapters (intro, expanded key concepts, hands-on tool cards, curated reading list, learning path) following the AGENTS.md §9 template.
+- All external links verified reachable via `tools/check-links.mjs` (43/43 reachable); unreachable candidates (A2A GitHub, a 404 CrewAI enterprise URL) replaced with verified official/doc alternatives.
